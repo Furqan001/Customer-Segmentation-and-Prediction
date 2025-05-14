@@ -1,7 +1,7 @@
 import os
 
 with open('output.txt', 'w') as f:
-    f.write('Initial content\n')
+f.write('Initial content\n')
 
 with open('input.txt', 'r') as f:
     content = f.read()
