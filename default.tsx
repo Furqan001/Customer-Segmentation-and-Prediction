@@ -123,7 +123,16 @@ const TextInput = React.forwardRef(
               {...commonProps}
               options={props.options}
               type={props.maskInputType!}
-              ref={ref as React.Ref<TextInputMask>}
+              ref={(node) => {
+                // @ts-expect-error -- multiRef
+                const actualNode = node?.getElement?.();
+                if (actualNode) {
+                  if (ref) {
+                    // @ts-expect-error -- multiRef
+                    ref.current = actualNode;
+                  }
+                }
+              }}
               style={[
                 style.input,
                 props.compact ? style.compact : {},
@@ -141,12 +150,14 @@ const TextInput = React.forwardRef(
               {...omit(props, ['label', 'style', 'error', 'onBlur', 'onFocus', 'icon'])}
               {...commonProps}
               ref={(node) => {
-                if (ref) {
-                  // @ts-expect-error -- multiRef
-                  ref.current = node;
-                }
+                if (node) {
+                  if (ref) {
+                    // @ts-expect-error -- multiRef
+                    ref.current = node;
+                  }
                 // @ts-expect-error -- multiRef
-                localTextInputRef.current = node;
+                 localTextInputRef.current = node;
+                }
               }}
               style={[
                 style.input,
