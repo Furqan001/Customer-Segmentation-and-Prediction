@@ -204,7 +204,7 @@ const TextInput = React.forwardRef(
         ) : null}
       </View>
     );
-  },
+  }
 );
 
 export default TextInput;
