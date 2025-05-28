@@ -283,7 +283,7 @@ const Input = React.forwardRef(
         ) : null}
       </View>
     );
-  },
+  }
 );
 
 export default Input;
